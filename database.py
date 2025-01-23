@@ -23,3 +23,25 @@ def create_db():
     ''')
     conn.commit()
     conn.close()
+
+def guardar_respuesta(prompt: str, texto_generado: str):
+    """
+    OBJ: Función que guarda los textos en la base de datos
+    """
+    conn = db_connection()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO historial (prompt, texto_generado) VALUES (?,?)"), (prompt,texto_generado)
+    conn.commit()
+    conn.close()
+
+def ver_historial()->list:
+    """
+    OBJ: Función que devuelve todos los datos almacenados en la tabla historial en forma de Lista de tuplas
+    """
+    conn = db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM historial")
+    filas = cursor.fetchall()
+    conn.close()
+    return filas
+
