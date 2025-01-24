@@ -5,16 +5,17 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 app = FastAPI(title="Generador de Texto-Roams")
 
-tokenizer = AutoTokenizer.from_pretrained("gpt2")
-model = AutoModelForCausalLM.from_pretrained("gpt2")
+#Herramientas para la utilización del modelo IA
+tokenizer = AutoTokenizer.from_pretrained("openai-community/gpt2")
+model = AutoModelForCausalLM.from_pretrained("openai-community/gpt2")
 
 
 
-
+#Método POST, envio del prompt y estructura-modelo para generarar texto
 @app.post("/generar")
 async def generar_texto(request: PedirGeneTexto):
     """
-
+    OBJ: Conseguir texto generado a partir de los datos proporcionados, siguiendo el modelo de models.py
     """
     try:
         result = model.generate(
@@ -30,13 +31,14 @@ async def generar_texto(request: PedirGeneTexto):
         txt_generado = tokenizer.decode(result[0], skip_special_tokens=True)
         #print(txt_generado)
 
+        #Guardar en la base de datos
         guardar_respuesta(request.prompt, txt_generado)
 
         return {"prompt":request.prompt, "texto_generado":txt_generado}
     except:
         print("Error al ejecutar el modelo IA")
 
-
+#Método GET, extraer las consultas realizadas de la database
 @app.get("/historial")
 async def get_historial():
     return ver_historial()

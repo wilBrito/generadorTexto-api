@@ -9,7 +9,7 @@ class PedirGeneTexto(BaseModel):
     PRE: Configurar parámetros opcionales del modelo, como longitud máxima del texto generado, temperatura, y top-p.
     """
     prompt: str = Field(..., min_length=1 , description="Texto inicial")
-    longitud: int = Field(50,ge=1, le=500, description="Rango (número) de las palabras generadas")
+    longitud: int = Field(50,ge=1, le=300, description="Rango (número) de las palabras generadas")
     temperatura: float = Field(1.0,ge=0.0, le=1.0, description="Aleatoriedad de la respuesta")
     top_p: float = Field(1.0,ge=0.0, le=1.0, description="Alternativa a temperatura")
 
