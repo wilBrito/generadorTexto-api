@@ -73,7 +73,7 @@ Poyecto propuesto por la empresa Roams, basado en implemetar una API para genera
     ```
 
 2. Get:
-```bash
+    ```bash
 
     localhost:8000/historial
 
