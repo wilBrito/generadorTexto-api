@@ -5,7 +5,7 @@ def db_connection():
     OBJ: Establecer conexión con la base de datos SQLite creada
     """
     conn = sqlite3.connect('historialTextos.db')
-    #conn.row_factory = sqlite3.Row
+    conn.row_factory = sqlite3.Row
     return conn
 
 def create_db():
