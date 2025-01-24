@@ -30,7 +30,7 @@ def guardar_respuesta(prompt: str, texto_generado: str):
     """
     conn = db_connection()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO historial (prompt, texto_generado) VALUES (?,?)"), (prompt,texto_generado)
+    cursor.execute("INSERT INTO historial (prompt, texto_generado) VALUES (?,?)", (prompt,texto_generado))
     conn.commit()
     conn.close()
 

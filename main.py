@@ -30,7 +30,7 @@ async def generar_texto(request: PedirGeneTexto):
         txt_generado = tokenizer.decode(result[0], skip_special_tokens=True)
         #print(txt_generado)
 
-        #guardar_respuesta(request.prompt, txt_generado)
+        guardar_respuesta(request.prompt, txt_generado)
 
         return {"prompt":request.prompt, "texto_generado":txt_generado}
     except:
@@ -41,4 +41,3 @@ async def generar_texto(request: PedirGeneTexto):
 async def get_historial():
     return ver_historial()
 
-#uvicorn main:app --reload
