@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from models import RespuestaGeneTexto, PedirGeneTexto
 from database import guardar_respuesta, ver_historial
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -16,7 +16,11 @@ model = AutoModelForCausalLM.from_pretrained("openai-community/gpt2")
 async def generar_texto(request: PedirGeneTexto):
     """
     OBJ: Conseguir texto generado a partir de los datos proporcionados, siguiendo el modelo de models.py
+    PRE: prompt no tiene que estar vacío
     """
+    if not request.prompt.strip():
+        return {"prompt":request.prompt, "texto_generado": "El prompt está vacío Error!!!!"}
+
     try:
         result = model.generate(
             tokenizer.encode(request.prompt, return_tensors='pt'),
