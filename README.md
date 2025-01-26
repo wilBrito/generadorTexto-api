@@ -36,10 +36,11 @@ Poyecto propuesto por la empresa Roams, basado en implemetar una API para genera
 # Prubas
 
 ## Postman
-1. Post:
+1. Post :
     ```bash
     localhost:8000/generar
     ```
+    Body JSON
     ```bash
     {
         "prompt": "Spain is",
@@ -56,6 +57,11 @@ Poyecto propuesto por la empresa Roams, basado en implemetar una API para genera
         "temperatura": 0.8,
         "top_p": 0.9
     }
+    ```
+    
+    AUTH - Bearer Token
+    ```bash
+    Token=ROAMS
     ```
 
 2. Get:

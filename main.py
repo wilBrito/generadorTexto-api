@@ -1,8 +1,10 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from models import RespuestaGeneTexto, PedirGeneTexto
 from database import guardar_respuesta, ver_historial
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import logging
+from security import verificar_token
+from fastapi.security import  HTTPAuthorizationCredentials
 
 # Configuración del logger
 logging.basicConfig(level=logging.INFO,
@@ -19,7 +21,7 @@ model = AutoModelForCausalLM.from_pretrained("openai-community/gpt2")
 
 #Método POST, envio del prompt y estructura-modelo para generarar texto
 @app.post("/generar")
-async def generar_texto(request: PedirGeneTexto):
+async def generar_texto(request: PedirGeneTexto, credenciales: HTTPAuthorizationCredentials = Depends(verificar_token)):
     """
     OBJ: Conseguir texto generado a partir de los datos proporcionados, siguiendo el modelo de models.py
     PRE: prompt no tiene que estar vacío
