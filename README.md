@@ -58,10 +58,10 @@ Poyecto propuesto por la empresa Roams, basado en implemetar una API para genera
         "top_p": 0.9
     }
     ```
-    
-    AUTH - Bearer Token
+
+    AUTH - Bearer Token - Contraseña
     ```bash
-    Token=ROAMS
+    ROAMS
     ```
 
 2. Get:
